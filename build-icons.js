@@ -62,10 +62,10 @@ findIcons()
       .map(({ name, component }) => {
         const path = `${distPath}/${name}.js`
         fs.writeFileSync(path, component)
-        return { name, path }
+        return name
       })
   )
-  .then(entries => compileIndex({ entries }))
+  .then(components => compileIndex({ components }))
   .then(fs.writeFileSync.bind(null, `${distPath}/index.js`))
   .catch(console.error)
 

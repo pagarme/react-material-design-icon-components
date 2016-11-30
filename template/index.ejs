@@ -1,5 +1,5 @@
-module.exports = {
-<% entries.forEach(({ name, path }) => { -%>
-  <%= name %>: require('<%= path  -%>'),
+export {
+<% components.forEach(component => { -%>
+  <%= component %>: require('./<%= component  -%>'),
 <% }) -%>
 }
