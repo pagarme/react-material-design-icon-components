@@ -1,12 +1,13 @@
 {
   "name": "react-md-icons",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
   "devDependencies": {
     "ejs": "^2.5.3",
     "globby": "^6.1.0",
     "material-design-icons": "^3.0.1",
-    "pascal-case": "^2.0.0"
+    "pascal-case": "^2.0.0",
+    "react-tools": "^0.13.3"
   }
 }
