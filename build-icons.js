@@ -49,7 +49,7 @@ findIcons()
       }))
       .map(({ name, content, size }) => ({
         name: 'Icon' + pascalcase(name) + size,
-        content: content.replace(xmlnsRegex, ""),
+        content: content.replace(xmlnsRegex, "{...props}"),
       }))
       .map(({ name, content }) => ({
         component: compileComponent({ name, content }),
