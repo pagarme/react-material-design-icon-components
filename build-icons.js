@@ -25,7 +25,7 @@ const compileIndex = ejs.compile(indexTemplate)
 
 const transformComponent = ({ component, name }) => {
   try {
-    return react.transform(component, { nonStrictEs6module: true })
+    return react.transform(component)
   } catch (e) {
     console.log(`Parse failed for module ${name}`)
     console.log(component)
