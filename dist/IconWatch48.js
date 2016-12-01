@@ -1,6 +1,1 @@
-const React = require('react')
-
-module.exports = function IconWatch48 (props) {
-  return React.createElement("svg", React.__spread({},  props, {width: "48", height: "48", viewBox: "0 0 48 48"}), React.createElement("path", {d: "M40 24c0-5.09-2.38-9.62-6.09-12.55L32 0H16l-1.91 11.45C10.38 14.38 8 18.91 8 24s2.38 9.62 6.09 12.55L16 48h16l1.91-11.45C37.62 33.62 40 29.09 40 24zm-28 0c0-6.63 5.37-12 12-12s12 5.37 12 12-5.37 12-12 12-12-5.37-12-12z"}))
-}
-
+React.createElement("svg", React.__spread({},  props, {width: "48", height: "48", viewBox: "0 0 48 48"}), React.createElement("path", {d: "M40 24c0-5.09-2.38-9.62-6.09-12.55L32 0H16l-1.91 11.45C10.38 14.38 8 18.91 8 24s2.38 9.62 6.09 12.55L16 48h16l1.91-11.45C37.62 33.62 40 29.09 40 24zm-28 0c0-6.63 5.37-12 12-12s12 5.37 12 12-5.37 12-12 12-12-5.37-12-12z"}))
