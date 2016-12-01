@@ -1,0 +1,21 @@
+const React = require('react')
+
+const icons = {
+<% sizes.forEach(size => { -%>
+  "<%- size %>": require('./<%- name + size %>.js'),
+<% }) -%>
+}
+
+module.exports = function <%- name %> (props) {
+  const size = props.size || 0
+  const nearest = Object.keys(icons).reduce((prev, curr) =>
+    Math.abs(curr - size) < Math.abs(prev - size) ? curr : prev)
+  const component = icons[nearest]
+
+  return <component />
+}
+
+module.exports.propTypes = {
+  size: React.PropTypes.number
+}
+

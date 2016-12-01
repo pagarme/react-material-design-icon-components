@@ -18,17 +18,19 @@ const writeDistributable = (name, content) =>
   fs.writeFileSync(path.join(distPath, name)).toString()
 
 const componentTemplate = loadTemplate('component.ejs')
+const componentWrapperTemplate = loadTemplate('component-wrapper.ejs')
 const indexTemplate = loadTemplate('index.ejs')
 
 const compileComponent = ejs.compile(componentTemplate)
+const compileWrapper = ejs.compile(componentWrapperTemplate)
 const compileIndex = ejs.compile(indexTemplate)
 
-const transformComponent = ({ component, name }) => {
+const transformComponent = ({ content, name }) => {
   try {
-    return react.transform(component)
+    return react.transform(content)
   } catch (e) {
     console.log(`Parse failed for module ${name}`)
-    console.log(component)
+    console.log(content)
     throw e
   }
 }
@@ -48,22 +50,54 @@ findIcons()
         content: fs.readFileSync(path).toString(),
       }))
       .map(({ name, content, size }) => ({
-        name: 'Icon' + pascalcase(name) + size,
+        name: 'Icon' + pascalcase(name),
         content: content.replace(xmlnsRegex, "{...props}"),
+        size,
       }))
-      .map(({ name, content }) => ({
-        component: compileComponent({ name, content }),
+      .map(({ name, size, content }) => ({
+        component: transformComponent({ name: name + size, content }),
+        size,
         name,
       }))
-      .map(({ name, component }) => ({
-        component: transformComponent({ name, component }),
+      .map(({ name, size, component }) => {
+        const path = `${distPath}/${name}${size}.js`
+        fs.writeFileSync(path, component)
+        return { name, size }
+      })
+      .reduce((grouped, { name, size }) => {
+        const icon = grouped.find(i => i.name === name) || {}
+
+        return grouped
+          // Filter memo to remove element
+          .filter(i => i !== icon)
+          // Add again, concatenating sizes
+          .concat([{
+            sizes: (icon.sizes || []).concat([size]),
+            name,
+          }])
+      }, [])
+      .map(({ name, sizes }) => ({
+        content: compileWrapper({ name, sizes }),
         name,
+        sizes,
       }))
-      .map(({ name, component }) => {
+      .map(({ name, sizes, content }) => ({
+        component: transformComponent({ name, content }),
+        name,
+        sizes,
+      }))
+      .map(({ name, sizes, component }) => {
         const path = `${distPath}/${name}.js`
         fs.writeFileSync(path, component)
-        return name
+        return { name, sizes }
       })
+      .reduce((flattened, { name, sizes }) =>
+        flattened
+          .concat([name])
+          .concat(sizes.map(size => name + size))
+      , [])
+      // .forEach(icon => console.log(icon))
+
   )
   .then(components => compileIndex({ components }))
   .then(fs.writeFileSync.bind(null, `${distPath}/index.js`))
