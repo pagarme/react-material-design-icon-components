@@ -1,20 +1,29 @@
-const React = require('react')
+'use strict';
 
-const icons = {
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var icons = {
   "24": require('./IconNavigateBefore24.js'),
-  "48": require('./IconNavigateBefore48.js'),
+  "48": require('./IconNavigateBefore48.js')
+};
+
+function IconNavigateBefore(props) {
+  var size = props.size;
+
+  var nearest = Object.keys(icons).reduce(function (prev, curr) {
+    return Math.abs(curr - size) < Math.abs(prev - size) ? curr : prev;
+  });
+  var component = icons[nearest];
+
+  return component(props);
 }
 
-module.exports = function IconNavigateBefore (props) {
-  const size = props.size || 0
-  const nearest = Object.keys(icons).reduce((prev, curr) =>
-    Math.abs(curr - size) < Math.abs(prev - size) ? curr : prev)
-  const component = icons[nearest]
+IconNavigateBefore.propTypes = {
+  size: _react2.default.PropTypes.oneOf(Object.keys(icons))
+};
 
-  return React.createElement("component", null)
-}
-
-module.exports.propTypes = {
-  size: React.PropTypes.number
-}
-
+module.exports = IconNavigateBefore;

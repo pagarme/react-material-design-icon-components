@@ -1,4 +1,4 @@
-const React = require('react')
+import React from 'react'
 
 const icons = {
 <% sizes.forEach(size => { -%>
@@ -6,16 +6,18 @@ const icons = {
 <% }) -%>
 }
 
-module.exports = function <%- name %> (props) {
-  const size = props.size || 0
+function <%- name %> (props) {
+  const { size } = props
   const nearest = Object.keys(icons).reduce((prev, curr) =>
     Math.abs(curr - size) < Math.abs(prev - size) ? curr : prev)
   const component = icons[nearest]
 
-  return <component />
+  return component(props)
 }
 
-module.exports.propTypes = {
-  size: React.PropTypes.number
+<%- name %>.propTypes = {
+  size: React.PropTypes.oneOf(Object.keys(icons))
 }
+
+module.exports = <%- name %>
 

@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const globby = require('globby')
 const pascalcase = require('pascal-case')
-const react = require('react-tools')
+const babel = require('babel-core')
 const ejs = require('ejs')
 
 
@@ -27,7 +27,7 @@ const compileIndex = ejs.compile(indexTemplate)
 
 const transformComponent = ({ content, name }) => {
   try {
-    return react.transform(content)
+    return babel.transform(content, { presets: ['react', 'es2015'] }).code
   } catch (e) {
     console.log(`Parse failed for module ${name}`)
     console.log(content)
@@ -40,24 +40,34 @@ const findIcons =
 
 const nameRegex = /.*\/ic_(.*)_(.*)px.*/
 const xmlnsRegex = /xmlns="((?:\\.|[^"\\])*)"/
+const fillOpacityRegex = /fill-opacity/
+const enableBackgroundRegex = /enable-background/
 
 findIcons()
   .then(paths =>
     paths
       .map((path) => ({
         name: path.replace(nameRegex, "$1"),
-        size: path.replace(nameRegex, "$2"),
         content: fs.readFileSync(path).toString(),
+        size: path.replace(nameRegex, "$2"),
       }))
       .map(({ name, content, size }) => ({
         name: 'Icon' + pascalcase(name),
-        content: content.replace(xmlnsRegex, "{...props}"),
+        content: content
+          .replace(xmlnsRegex, "{...props}")
+          .replace(enableBackgroundRegex, 'enableBackground')
+          .replace(fillOpacityRegex, 'fillOpacity'),
+        size,
+      }))
+      .map(({ name, content, size }) => ({
+        name,
+        content: compileComponent({ name, size, content }),
         size,
       }))
       .map(({ name, size, content }) => ({
+        name,
         component: transformComponent({ name: name + size, content }),
         size,
-        name,
       }))
       .map(({ name, size, component }) => {
         const path = `${distPath}/${name}${size}.js`
@@ -86,6 +96,10 @@ findIcons()
         name,
         sizes,
       }))
+      .map(({ name, sizes, component }) => {
+        console.log({ name, sizes, component })
+        return { name, sizes, component }
+      })
       .map(({ name, sizes, component }) => {
         const path = `${distPath}/${name}.js`
         fs.writeFileSync(path, component)

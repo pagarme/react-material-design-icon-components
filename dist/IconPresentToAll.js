@@ -1,20 +1,29 @@
-const React = require('react')
+'use strict';
 
-const icons = {
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var icons = {
   "24": require('./IconPresentToAll24.js'),
-  "48": require('./IconPresentToAll48.js'),
+  "48": require('./IconPresentToAll48.js')
+};
+
+function IconPresentToAll(props) {
+  var size = props.size;
+
+  var nearest = Object.keys(icons).reduce(function (prev, curr) {
+    return Math.abs(curr - size) < Math.abs(prev - size) ? curr : prev;
+  });
+  var component = icons[nearest];
+
+  return component(props);
 }
 
-module.exports = function IconPresentToAll (props) {
-  const size = props.size || 0
-  const nearest = Object.keys(icons).reduce((prev, curr) =>
-    Math.abs(curr - size) < Math.abs(prev - size) ? curr : prev)
-  const component = icons[nearest]
+IconPresentToAll.propTypes = {
+  size: _react2.default.PropTypes.oneOf(Object.keys(icons))
+};
 
-  return React.createElement("component", null)
-}
-
-module.exports.propTypes = {
-  size: React.PropTypes.number
-}
-
+module.exports = IconPresentToAll;
