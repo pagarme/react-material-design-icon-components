@@ -1,0 +1,23 @@
+import React from 'react'
+
+const icons = {
+<% sizes.forEach(size => { -%>
+  "<%- size %>": require('./<%- name + size %>.js'),
+<% }) -%>
+}
+
+function <%- name %> (props) {
+  const { size } = props
+  const nearest = Object.keys(icons).reduce((prev, curr) =>
+    Math.abs(curr - size) < Math.abs(prev - size) ? curr : prev)
+  const component = icons[nearest]
+
+  return component(props)
+}
+
+<%- name %>.propTypes = {
+  size: React.PropTypes.oneOf(Object.keys(icons))
+}
+
+module.exports = <%- name %>
+

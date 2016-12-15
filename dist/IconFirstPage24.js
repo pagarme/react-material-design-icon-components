@@ -1,6 +1,19 @@
-const React = require('react')
+"use strict";
 
-module.exports = function IconFirstPage24 (props) {
-  return React.createElement("svg", React.__spread({},  props, {width: "24", height: "24", viewBox: "0 0 24 24"}), React.createElement("path", {d: "M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"}))
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function IconFirstPage(props) {
+  return _react2.default.createElement(
+    "svg",
+    _extends({}, props, { width: "24", height: "24", viewBox: "0 0 24 24" }),
+    _react2.default.createElement("path", { d: "M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z" })
+  );
 }
 
+module.exports = IconFirstPage;

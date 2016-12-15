@@ -1,6 +1,19 @@
-const React = require('react')
+"use strict";
 
-module.exports = function IconBluetooth48 (props) {
-  return React.createElement("svg", React.__spread({},  props, {width: "48", height: "48", viewBox: "0 0 48 48"}), React.createElement("path", {d: "M35.41 15.41L24 4h-2v15.17L12.83 10 10 12.83 21.17 24 10 35.17 12.83 38 22 28.83V44h2l11.41-11.41L26.83 24l8.58-8.59zM26 11.66l3.76 3.76L26 19.17v-7.51zm3.76 20.93L26 36.34v-7.52l3.76 3.77z"}))
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function IconBluetooth(props) {
+  return _react2.default.createElement(
+    "svg",
+    _extends({}, props, { width: "48", height: "48", viewBox: "0 0 48 48" }),
+    _react2.default.createElement("path", { d: "M35.41 15.41L24 4h-2v15.17L12.83 10 10 12.83 21.17 24 10 35.17 12.83 38 22 28.83V44h2l11.41-11.41L26.83 24l8.58-8.59zM26 11.66l3.76 3.76L26 19.17v-7.51zm3.76 20.93L26 36.34v-7.52l3.76 3.77z" })
+  );
 }
 
+module.exports = IconBluetooth;

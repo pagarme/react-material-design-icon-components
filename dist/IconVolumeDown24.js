@@ -1,6 +1,19 @@
-const React = require('react')
+"use strict";
 
-module.exports = function IconVolumeDown24 (props) {
-  return React.createElement("svg", React.__spread({},  props, {width: "24", height: "24", viewBox: "0 0 24 24"}), React.createElement("path", {d: "M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z"}))
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function IconVolumeDown(props) {
+  return _react2.default.createElement(
+    "svg",
+    _extends({}, props, { width: "24", height: "24", viewBox: "0 0 24 24" }),
+    _react2.default.createElement("path", { d: "M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z" })
+  );
 }
 
+module.exports = IconVolumeDown;

@@ -1,6 +1,20 @@
-const React = require('react')
+"use strict";
 
-module.exports = function IconSignalCellular_1Bar24 (props) {
-  return React.createElement("svg", React.__spread({},  props, {width: "24", height: "24", viewBox: "0 0 24 24"}), React.createElement("path", {"fill-opacity": ".3", d: "M2 22h20V2z"}), React.createElement("path", {d: "M12 12L2 22h10z"}))
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function IconSignalCellular_1Bar(props) {
+  return _react2.default.createElement(
+    "svg",
+    _extends({}, props, { width: "24", height: "24", viewBox: "0 0 24 24" }),
+    _react2.default.createElement("path", { fillOpacity: ".3", d: "M2 22h20V2z" }),
+    _react2.default.createElement("path", { d: "M12 12L2 22h10z" })
+  );
 }
 
+module.exports = IconSignalCellular_1Bar;
